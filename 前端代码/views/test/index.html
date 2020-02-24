@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="../../static/css/index.css">
+    <link rel="stylesheet" href="../../static/eui/element-ui.css">
+    <script src="../../static/vue/vue.min.js"></script>
+    <script src="../../static/vue/vue-resource.js"></script>
+    <script src="../../static/eui/index.js"></script>
+    <script src="../../static/comm/Ajax.js"></script>
+</head>
+<style>
+    #top-banner {
+        position: relative;
+        width: 1226px;
+        margin: 0 auto;
+    }
+    #top-banner .banner-ct {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210px;
+        height: 252px;
+        /*padding: 20px 0;*/
+        background: rgba(200, 22, 35,1);
+        z-index: 10;
+    }
+    #top-banner .banner-ct .banner-left .wrap-left {
+        padding-left: 0;
+        width: 235px;
+        height: 420px;
+    }
+    #top-banner .banner-ct .banner-left .wrap-left .item {
+        box-sizing: border-box;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        font-size: 14px;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        /*padding: 0 30px;*/
+        text-align: center;
+        cursor: pointer;
+    }
+    #top-banner .banner-ct .banner-left .wrap-left .item .iconfont {
+        font-weight: bold;
+        font-size: 16px;
+    }
+    #top-banner .banner-ct .banner-left .wrap-left .item:hover {
+         background: #fff;
+         color: black;
+     }
+
+
+
+
+    #top-banner .banner-ct .banner-detail {
+        /*position: absolute;*/
+        /*left: 210px;*/
+        /*top: 0;*/
+        /*z-index: 10;*/
+        /*border: 1px solid #e0e0e0;*/
+        /*box-shadow: 3px 8px 16px rgba(0,0,0,0.18);*/
+        width:477px;
+        min-height:238px;
+        background: #f7f7f7;
+        border:1px solid #DDD;
+        position:absolute;
+        left:210px;
+        padding:5px 0;
+        z-index:20;
+    }
+    #top-banner .banner-ct .banner-detail .detail-wrap {
+        width: 460px;
+        /*height: 460px;*/
+        background: #f7f7f7;
+        display: flex;
+        flex-flow: wrap;
+        flex-direction: column;
+        align-items: flex-start;
+        align-content: flex-start;
+        justify-content: flex-start;
+        display: inline-block;
+    }
+    #top-banner .banner-ct .banner-detail .item {
+        position: relative;
+        display: flex;
+        flex-flow: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100px;
+        /*height: 76px;*/
+        padding: 0 20px;
+        box-sizing: border-box;
+        background: #f7f7f7;
+        cursor: pointer;
+        float:left;
+    }
+    #top-banner .banner-ct .banner-detail .item .link {
+        display: flex;
+        flex-flow: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        min-width: 100px;
+        color:#555;
+        text-decoration:none;
+        /*display:block;*/
+        /*width:210px;*/
+        /*height: 30px;*/
+        /*line-height:30px;*/
+        /*text-indent: 20px;*/
+    }
+    #top-banner .banner-ct .banner-detail .item .a{
+        color: #E4393C;font-weight:700;width:62px;
+    }
+    #top-banner .banner-ct .banner-detail .item .link img {
+        width: 40px;
+        height: 40px;
+    }
+    #top-banner .banner-ct .banner-detail .item .link .text-name {
+        padding-left: 10px;
+        font-size: 14px;
+    }
+
+    .content .wrap #content .slide .bullet {
+        width: 100%;
+        position: absolute;
+        bottom: 10px;
+        margin: 0 auto;
+        text-align: center;
+        z-index: 9;
+    }
+
+    .content .wrap #content .slide .bullet span {
+        width: 0.7rem;
+        height: 0.7rem;
+        background: white;
+        display: inline-block;
+        margin-right: 0.2rem;
+        border-radius: 50%;
+    }
+    .content .wrap #content .slide .bullet .red{
+        background: red;
+    }
+</style>
+
+<body>
+<!-- 顶部导航栏-->
+<div class="top">
+    <div class="wrap">
+        <ul><li>收藏本站</li><li>关注本站</li></ul>
+        <ul class="top-right">
+            <li>您好，欢迎来到网上商城！[<a href="#">登录</a>][<a href="#">免费注册</a>]</li>
+            <li class="top-line">|</li><li><a href="#">我的订单</a></li>
+            <li class="top-line">|</li><li><a href="#">会员中心</a></li>
+            <li class="top-line">|</li><li><a class="pjax" href="cart.html" >我的购物车</a></li>
+            <li class="top-line">|</li><li>联系客服</li>
+        </ul>
+    </div>
+</div>
+<!-- 头部 -->
+<div class="header">
+    <div class="wrap">
+        <a class="pjax header-logo" href="index.html"><img src="img/logo.png" alt="在线商城"></a>
+        <div class="header-search">
+            <input type="text" class="header-search-text">
+            <input class="header-search-btn" type="button" value="搜索">
+            <p class="header-search-hot">热门搜索：PHP培训　专业教材　智能手机　平板电脑</p>
+        </div>
+        <div class="header-info">
+            <a href="#">会员中心</a>
+            <a class="pjax" href="cart.html">去购物车结算</a>
+        </div>
+    </div>
+</div>
+<!-- 主导航栏 -->
+<div class="nav">
+    <div class="wrap">
+        <div id="category_show" class="nav-category">
+            <div class="nav-category-tl"><a class="pjax" href="find-0.html">全部商品分类</a></div>
+            <div id="category_list" class="category"></div>
+
+            <!--全部商品分类-->
+            <div id="app">
+                <template>
+                    <div id="top-banner">
+                        <div class="banner-ct"
+                             @mouseleave="isLeave()">
+                            <div class="banner-left">
+                                <ul class="wrap-left">
+                                    <li class="item"
+                                        @mouseenter="isEnter(c1.id)"
+                                        v-for="c1 in c1s"
+                                         v-show="c1.sort<9">
+                                        <span>{{c1.name}}</span>
+                                        <!--<span class="iconfont">&gt;</span>-->
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="banner-detail"
+                                 v-show="goodsStatus">
+                                <ul class="detail-wrap" v-for="c2 in c2s">
+                                    <li class="item">
+                                        <a class="link a">
+                                            <!--<img :src="item.imgUrl" alt="" />-->
+                                            <span class="text-name">{{c2.name}}</span>
+                                        </a>
+                                            <li style="font-size: 14px;display: block;">
+                                            <span v-for="c3 in c3s" :class="getC3s(c2.id,c3.parent_id)" class="top-line" v-show="c2.id===c3.parent_id">
+                                                | {{c3.name}}
+                                            </span>
+                                            </li>
+                                    </li>
+                                    <!--<li :id="stop(c2.id)" style="font-size: 14px;" v-for="c3 in c3s">-->
+                                            <!--<span class="top-line">-->
+                                                <!--| {{c3.name}}-->
+                                            <!--</span>-->
+                                    <!--</li>-->
+
+                                </ul>
+                                <!--<ul class="detail-wrap">-->
+                                    <!--<li class="item" v-for="c2 in c2s" >-->
+                                        <!--<a class="link" :href="c2.id">-->
+                                            <!--&lt;!&ndash;<img :src="item.imgUrl" alt="" />&ndash;&gt;-->
+                                            <!--<span class="text-name">{{c2.name}}</span>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+        </div>
+        <ul><li>服装城</li><li>特色购物</li><li>优惠促销</li><li>限时秒杀</li><li>品牌专区</li><li>服务中心</li></ul>
+    </div>
+    <div class="nav-line"></div>
+</div>
+<!-- 内容区域 -->
+    <div class="content">
+        <div class="wrap">
+            <div id="content">
+                <div class="slide">
+                    <ul></ul>
+                    <li style="list-style: none;" v-for='(image,index) in ShufflingFigure' :key='index' v-show='index===mark'>
+                        <a :href="image.url"><img :src="'upload/'+image.pic"></a>
+                    </li>
+                    <div class="bullet">
+                        <span v-for='(item,index) in ShufflingFigure.length' :class="{'active':index===mark,red:changeRed==index}" @click='change(index)'></span>
+                    </div>
+                </div>
+                <div class="news">
+                    <div class="news-title">最新动态</div>
+                    <ul class="news-content" v-for="n in ns">
+                        <li>{{n.title}}</li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+                <div class="best">
+                    <div class="best-title">精品推荐</div>
+                    <div class="best-content"></div>
+
+                    <ul class="item" v-for="recommended in recommendeds" v-show="recommended.id>34&recommended.id<41">
+                        <li>
+                            <a href="#" target="_blank"><img :src="'upload/'+recommended.pic" alt=""></a>
+                        </li>
+                        <li class="goods">
+                            <a href="#" target="_blank">{{recommended.title}}</a>
+                        </li>
+                        <li class="price">￥{{recommended.price}}</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="service">
+    <div class="wrap">
+        <ul><li>购物指南</li><li>配送方式</li><li>支付方式</li><li>售后服务</li><li>特色服务</li><li>网络服务</li></ul>
+    </div>
+</div>
+<div class="footer">在线商城·本项目仅供学习使用</div>
+<!--<script src="js/common.js"></script>-->
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        name: 'topBanner',
+        data () {
+
+            return {
+                currGoods:[],
+                goodsStatus: false,
+                c1s:[],
+                // c2s:[],
+                c2s:this.c2s,
+                c3s:[]
+            }
+        },
+        // ready () {
+        // },
+        // watch: {
+        //     stop:function(x){
+        //         let that = this;
+        //         let url = "category/spid/"+x;
+        //         //调用Ajax的get方法
+        //         that.ajax.get(url, function (rs) {
+        //             console.log(rs);
+        //             that.c3s = rs;
+        //         });
+        //     }
+        // },
+        created() {
+            this.ajax = new Ajax(this);
+            this.getC1s();
+            // this.getC3s();
+        },
+        // beforeCreate(){
+        //     this.stop();
+        // },
+        methods: {
+            isEnter (currType) {
+                this.goodsStatus = true;
+                this.getC2s(currType);
+                // this.getC3s(currType1);
+            },
+            // stop(currType1){
+            //     this.goodsStatus = true;
+            //     this.getC3s(currType1);
+            // },
+            isLeave () {
+                this.goodsStatus = false
+            },
+            //通过ajax去请求服务端，获取数据
+            getC1s() {
+                let that = this;
+                let url = "category/spid/0";
+                // let url = "category/selectParentId?parentId=0";
+                //调用Ajax的get方法
+                that.ajax.get(url, function (rs) {
+                    // console.log(rs);
+                    that.c1s = rs;
+                });
+            },
+            getC2s(currType) {
+                let that = this;
+                let url = "category/spid/"+currType;
+                // let url = "category/selectParentId?parentId="+currType;
+                //调用Ajax的get方法
+                that.ajax.get(url, function (rs) {
+                    // console.log(rs);
+                    that.c2s = rs;
+                });
+            },
+            getC3s(currType1,currType2) {
+                if (currType1 === currType2) {
+                    let that = this;
+                    let url = "category/spid/" + currType1;
+                    console.log(currType1)
+                    // let url = "category/selectParentId?parentId="+currType1;
+                    //调用Ajax的get方法
+                    that.ajax.get(url, function (rs) {
+                        console.log(rs);
+                        that.c3s = rs;
+                    });
+                }
+            },
+        },
+    }),
+    /*内容区域*/
+    new Vue ({
+        el: '#content',
+        name: 'mallContent',
+        data: function() {
+            return {
+                mark: 0,
+                timer: null,
+                ShufflingFigure: [],
+                changeRed:0,
+                recommendeds:[],
+                ns:[]
+            }
+        },
+        created() {
+            this.play();
+            this.ajax = new Ajax(this);
+            this.getShufflingFigure();
+            this.getRecommended();
+            this.getNs();
+            setInterval(this.autoPlay, 3000);
+        },
+        methods: {
+            // fetchShuffingFigure(){
+            //     this.$http.get("http://localhost:8088/slide/ss")
+            //         .then(function(response){
+            //             console.log(response);
+            //             this.ShufflingFigure = response.body
+            //         })
+            // },
+            getShufflingFigure() {
+                let that = this;
+                let url = "slide/ss";
+                // let url = "slide/selectAll";
+                //调用Ajax的get方法
+                that.ajax.get(url, function (rs) {
+                    // console.log(rs);
+                    that.ShufflingFigure = rs;
+                    // that.sl=ShufflingFigure.length;
+                });
+            },
+            // fetchRecommended(){
+            //     this.$http.get("http://localhost:8088/slide/ss")
+            //         .then(function(response){
+			// 			console.log(response);
+            //             this.recommendeds = response.body
+            //         })
+            // },
+            getRecommended(){
+                let that = this;
+                let url = "item/si";
+                // let url = "item/selectAll";
+                //调用Ajax的get方法
+                that.ajax.get(url, function (rs) {
+                    // console.log(rs);
+                    that.recommendeds = rs;
+                    // console.log(that.recommendeds);
+                });
+            },
+            getNs(){
+                let that = this;
+                let url = "news/sn";
+                // let url = "item/selectAll";
+                //调用Ajax的get方法
+                that.ajax.get(url, function (rs) {
+                    // console.log(rs);
+                    that.ns = rs;
+                });
+            },
+            change(i) {
+                this.mark = i;
+                this.changeRed = i;
+            },
+            autoPlay() {
+                this.mark++;
+                this.changeRed=this.mark;
+                if(this.mark === this.ShufflingFigure.length) {
+                    this.mark = 0
+                    this.changeRed=this.mark;
+                    return
+                }
+            },
+			play() {
+				setInterval(this.autoPlay, 3000)
+			}
+        },
+        // created(){
+        //     this.fetchRecommended();
+        //     this.fetchShuffingFigure();
+        //     setInterval(this.autoPlay, 3000);
+        // }
+    })
+</script>
+</html>

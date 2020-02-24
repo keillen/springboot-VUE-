@@ -1,0 +1,78 @@
+<div class="slide" id="slide">
+  <ul>
+    <li v-for="v in v1"><a href=""><img src="../upload/image/2018-03/29/hot_69a474b2938ba3b5b6a4592c08cd3632.jpg" alt="{{v.title}}"></a></li>
+  </ul>
+  <!--<script id="slide_tpl" type="text/html">-->
+    <!--{{each item v}}-->
+    <!--<li><a href="{{v.url}}"><img src="{{v.pic}}" alt="{{v.title}}"></a></li>-->
+    <!--{{/each}}-->
+  <!--</script>-->
+  <div class="slide-nav"></div>
+  <!--<script src="../js/jquery.slide.js"></script>-->
+</div>
+<div class="news">
+  <div class="news-title">最新动态</div>
+  <ul class="news-content"></ul>
+  <!--<script id="news_tpl" type="text/html">-->
+    <!--{{each item v}}-->
+    <!--<li><a style="{{if v.color !== ''}}color:{{v.color}}{{/if}}" href="{{v.url}}" target="_blank">{{v.title}}</a></li>-->
+    <!--{{/each}}-->
+  <!--</script>-->
+</div>
+<div class="clear"></div>
+<div class="best">
+  <div class="best-title">精品推荐</div>
+  <div class="best-content"></div>
+  <!--<script id="best_tpl" type="text/html">-->
+    <!--{{each item v}}-->
+    <!--<ul class="item">-->
+      <!--<li><a href="item-{{v.id}}.html" target="_blank"><img src="{{v.pic}}" alt="{{v.title}}"></a></li>-->
+      <!--<li class="goods"><a href="item-{{v.id}}.html" target="_blank">{{v.title}}</a></li>-->
+      <!--<li class="price">￥{{v.price}}</li>-->
+    <!--</ul>-->
+    <!--{{/each}}-->
+  <!--</script>-->
+</div>
+<!--<script>-->
+  <!--$.get(Config.api + 'slides', function(data) {-->
+    <!--Common.slidePath(data);-->
+    <!--$('.slide ul').html(template('slide_tpl', {item: data}));-->
+    <!--$('.slide').slide();-->
+  <!--});-->
+  <!--$.get(Config.api + 'news', function(data) {-->
+    <!--$('.news-content').html(template('news_tpl', {item: data}));-->
+  <!--});-->
+  <!--$.get(Config.api + 'goods?count=6', function(data) {-->
+    <!--Common.itemPicPath(data);-->
+    <!--$('.best-content').html(template('best_tpl', {item: data}));-->
+  <!--});-->
+<!--</script>-->
+<script src="../../../static/vue/vue.min.js"></script>
+<script src="../../../static/vue/vue-resource.js"></script>
+<script src="../../../static/comm/Ajax.js"></script>
+<script>
+    var Slide = new Vue({
+        el:"#slide",
+        data: {
+           v1:[]
+        },
+
+        //页面初始化的时候，去调用
+        created() {
+            this.ajax = new Ajax(this);
+            this.getV1();
+        },
+
+        methods: {
+            getV1() {
+                let that = this;
+                let url = "slide/ss";
+                //调用Ajax的get方法
+                that.ajax.get(url, function (rs) {
+                    console.log(rs);
+                    that.v1 = rs;
+                });
+            }
+        }
+    })
+</script>

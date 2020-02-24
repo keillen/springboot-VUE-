@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery-1.12.4.js"></script>
+	<link rel="stylesheet" href="../../static/css/index.css">
+	<link rel="stylesheet" href="../../static/eui/element-ui.css">
+	<script src="../../static/vue/vue.min.js"></script>
+	<script src="../../static/vue/vue-resource.js"></script>
+	<script src="../../static/eui/index.js"></script>
+	<script src="../../static/comm/Ajax.js"></script>
+</head>
+<body>
+<div class="top">
+	<div class="wrap">
+		<ul><li>收藏本站</li><li>关注本站</li></ul>
+		<ul class="top-right">
+			<li>您好，欢迎来到网上商城！[<a href="#">登录</a>][<a href="#">免费注册</a>]</li>
+			<li class="top-line">|</li><li><a href="#">我的订单</a></li>
+			<li class="top-line">|</li><li><a href="#">会员中心</a></li>
+			<li class="top-line">|</li><li><a class="pjax" href="cart.html" >我的购物车</a></li>
+			<li class="top-line">|</li><li>联系客服</li>
+		</ul>
+	</div>
+</div>
+<!-- 头部 -->
+<div class="header">
+	<div class="wrap">
+		<a class="pjax header-logo" href="index.html"><img src="img/logo.png" alt="在线商城"></a>
+		<div class="header-search">
+			<input type="text" class="header-search-text">
+			<input class="header-search-btn" type="button" value="搜索">
+			<p class="header-search-hot">热门搜索：PHP培训　专业教材　智能手机　平板电脑</p>
+		</div>
+		<div class="header-info">
+			<a href="#">会员中心</a>
+			<a class="pjax" href="cart.html">去购物车结算</a>
+		</div>
+	</div>
+</div>
+<!-- 主导航栏 -->
+<div class="nav">
+	<div class="wrap">
+		<div id="category_show" class="nav-category">
+			<div class="nav-category-tl"><a class="pjax" href="find-0.html" >全部商品分类</a></div>
+			<div id="category_list" class="category"></div>
+			<div id="app">
+				<template>
+					<div id="top-banner">
+						<div class="banner-ct"
+							 @mouseleave="isLeave()">
+							<div class="banner-left">
+								<ul class="wrap-left">
+									<li class="item"
+										@mouseenter="isEnter(c1.id)"
+										v-for="c1 in c1s"
+										v-show="c1.sort<9">
+										<span>{{c1.name}}</span>
+										<!--<span class="iconfont">&gt;</span>-->
+									</li>
+								</ul>
+							</div>
+							<div class="banner-detail"
+								 v-show="goodsStatus">
+								<ul class="detail-wrap" v-for="c2 in c2s">
+									<li class="item">
+										<a class="link a">
+											<!--<img :src="item.imgUrl" alt="" />-->
+											<span class="text-name">{{c2.name}}</span>
+										</a>
+									<li :id="stop(c2.id)" style="font-size: 14px;" v-for="c3 in c3s">
+                                            <span class="top-line">
+                                                | {{c3.name}}
+                                            </span>
+									</li>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</template>
+			</div>
+
+		</div>
+		<ul><li>服装城</li><li>特色购物</li><li>优惠促销</li><li>限时秒杀</li><li>品牌专区</li><li>服务中心</li></ul>
+	</div>
+	<div class="nav-line"></div>
+</div>
+<div class="content">
+	<div class="wrap" id="details">
+		<div id="content"><div class="crumbs">
+			<a class="pjax" href="one.html">首页</a>
+			<i></i><a class="pjax" href="find-1.html">图书、音像、电子书刊</a>
+			<i></i><a class="pjax" href="find-2.html">电子书刊</a>
+			<i></i><a class="pjax" href="find-3.html">电子书</a>
+		</div>
+
+			<div id="center" v-for="good in goods">
+				<a class="pjax" href="one.html">首页</a>
+				<i></i><a class="pjax" href="'find-'+good.id+'.html'">{{good.name}}</a>
+				<div class="item">
+					<div class="album">
+						<div class="album-mid">
+							<a href="#" target="_blank"><img :src="'upload/'+good.pic"class="album-mid-img" alt="预览图"></a>
+							<div class="album-mask" style="display: none; left: 175px; top: 15.5px;"></div>
+						</div>
+						<div class="album-small">
+							<div class="album-btn-left"></div>
+							<div class="album-list">
+								<ul>
+									<li class="album-curr"><img :src="'upload/'+good.pic" alt="预览图"></li>
+								</ul>
+							</div>
+							<div class="album-btn-right"></div>
+						</div>
+						<div class="album-big" style="display: none;"><img class="album-big-img" alt="预览图" :src="'upload/'+good.pic" style="left: -379px; top: -33.5686px;"></div>
+					</div>
+					<div class="item-info">
+						<h1>{{good.title}}</h1>
+						<div class="item-info-sell">{{good.sell_point}}</div>
+						<table>
+							<tbody><tr><th>售 价：</th><td><span class="item-info-price">{{good.price}}</span></td></tr>
+							<tr><th>累计销量：</th><td>0</td></tr>
+							<tr><th>评 价：</th><td>0</td></tr>
+							<tr><th>配送至：</th><td>北京（免运费）</td></tr>
+							<tr>
+								<th>购买数量：</th>
+								<td>
+									<input type="button" value="-" class="item-num-sub">
+									<input type="text" value="1" id="item_num" class="item-num">
+									<input type="button" value="+" class="item-num-add">
+									（库存：<span class="item-num-stock">{{good.num}}</span>）
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="item-info-button">
+									<a href="#" class="light">立即购买</a>
+									<a href="#" id="cart_add">加入购物车</a>
+								</td>
+							</tr>
+							</tbody></table>
+					</div>
+					</div>
+					<div class="item-line"></div>
+					<div class="item-ads">
+						<div class="item-ads-title">相关商品推荐</div>
+						<div class="item-ads-content">
+
+							<ul class="item-ads-item">
+								<li>
+									<a href="item-41.html" target="_blank">
+										<img src="upload/image/2018-03/29/pic_9c34269665d881bb78d9d5ed2f477d5a.png" alt="响应式Web开发项目教程（HTML5+CSS3+Bootstrap）">
+									</a>
+								</li>
+								<li class="item-ads-name"><a href="upload/image/2018-03/29/pic_9c34269665d881bb78d9d5ed2f477d5a.png" target="_blank">响应式Web开发项目教程（HTML5+CSS3+Bootstrap）</a></li>
+								<li class="item-ads-price">￥42.00</li>
+							</ul>
+
+							<ul class="item-ads-item">
+								<li>
+									<a href="item-40.html" target="_blank">
+										<img src="upload/image/2018-03/29/pic_94c27a6e4a9177371de5ed7f3c08a2b5.png" alt="Java Web程序设计任务教程">
+									</a>
+								</li>
+								<li class="item-ads-name"><a href="upload/image/2018-03/29/pic_94c27a6e4a9177371de5ed7f3c08a2b5.png" target="_blank">Java Web程序设计任务教程</a></li>
+								<li class="item-ads-price">￥56.00</li>
+							</ul>
+
+							<ul class="item-ads-item">
+								<li>
+									<a href="item-39.html" target="_blank">
+										<img src="upload/image/2018-03/29/pic_af5c03732dba5d473ed8d884a97cf1ae.jpg" alt="微服务架构基础（Spring Boot+Spring Cloud+Docker）">
+									</a>
+								</li>
+								<li class="item-ads-name"><a href="upload/image/2018-03/29/pic_af5c03732dba5d473ed8d884a97cf1ae.jpg" target="_blank">微服务架构基础（Spring Boot+Spring Cloud+Docker）</a></li>
+								<li class="item-ads-price">￥35.00</li>
+							</ul>
+
+						</div>
+					</div>
+					<div class="item-desc">
+						<div class="item-desc-title">商品详情</div>
+						<div class="item-desc-content">
+							<p>
+
+								<span style="color:rgb(156,156,156);font-family:Avenir, 'PingFang SC', 'Microsoft Yahei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;font-size:14px;background-color:rgb(255,255,255);">本书从初学者的角度出发，深刻且通俗地揭示了JavaWeb开发内幕。全书共15章，详细讲解了网页开发的基础知识和Java Web开发的重要知识，其中网页开发基础知识包括HTML技术、CSS技术和JavaScript技术，而Java Web的进阶知识包括Servlet技术、会话技术、JSP技术，以及JDBC和数据库连接池等技术。本书加入了真实的电商项目，揭示了项目开发的真实内幕，可以让学习者切身感受到项目开发带来的乐趣。</span>
+								<br>
+								<span style="color:rgb(156,156,156);font-family:Avenir, 'PingFang SC', 'Microsoft Yahei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;font-size:14px;background-color:rgb(255,255,255);">本书使用深入浅出、通俗易懂的语言阐述教材中涉及的概念，并通过结合典型翔实的Web应用案例、分析案例代码、解决常见问题等方式，帮助读者真正明白Web应用程序开发的全过程。</span>
+								<br><span style="color:rgb(156,156,156);font-family:Avenir, 'PingFang SC', 'Microsoft Yahei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;font-size:14px;background-color:rgb(255,255,255);">本书附有配套视频、源代码、习题、教学课件等资源；另外，为了帮助初学者更好地学习本书讲解的内容，还提供了在线答疑，希望得到更多读者的关注。</span>
+								<br><span style="color:rgb(156,156,156);font-family:Avenir, 'PingFang SC', 'Microsoft Yahei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;font-size:14px;background-color:rgb(255,255,255);">本书适合作为高等院校计算机相关专业程序设计或者Web项目开发的教材，是一本适合广大计算机编程爱好者的优秀读物。</span></p></div>
+					</div>
+					<div class="item-line"></div>
+				</div>
+
+		</div>
+	</div>
+</div>
+</body>
+<script>
+	new Vue({
+		el:"#details",
+        data () {
+            return {
+                goods:[]
+            }
+        },
+        created() {
+            this.ajax = new Ajax(this);
+            this.getGoods();
+        },
+        methods: {
+            getGoods() {
+                let that = this;
+                let url = "item/selectItemById?id=40";
+                //调用Ajax的get方法
+                that.ajax.get(url, function (rs) {
+                    // console.log(rs);
+                    that.goods = rs;
+                });
+            },
+		},
+	})
+</script>
+
+</html>

@@ -1,0 +1,26 @@
+server:
+  port: 8088
+  servlet:
+    path: /
+logging:
+  level:
+    cn.zxsc: debug
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/jq_shop?ullNamePatternMatchesAll=true&amp;serverTimezone=GMT%2b8?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+  thymeleaf:
+    encoding: UTF-8
+
+tomcat:
+  uri-encoding: UTF-8
+#驼峰开启 lastName=last_name
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: com.zxsc.springboot.bean
